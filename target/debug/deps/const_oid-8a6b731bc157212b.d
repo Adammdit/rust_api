@@ -1,0 +1,13 @@
+/home/adamm/Rust/rust_api/target/debug/deps/const_oid-8a6b731bc157212b.d: /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/lib.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/checked.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/arcs.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/buffer.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/encoder.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/error.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/parser.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/traits.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/../README.md
+
+/home/adamm/Rust/rust_api/target/debug/deps/libconst_oid-8a6b731bc157212b.rmeta: /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/lib.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/checked.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/arcs.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/buffer.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/encoder.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/error.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/parser.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/traits.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/../README.md
+
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/lib.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/checked.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/arcs.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/buffer.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/encoder.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/error.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/parser.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/traits.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/const-oid-0.10.2/src/../README.md:
