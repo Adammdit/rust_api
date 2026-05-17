@@ -1,0 +1,14 @@
+/home/adamm/Rust/rust_api/target/debug/deps/awc-79c928089b549774.d: /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/lib.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/builder.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/connect.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/error.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/frozen.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/request.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/response.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/sender.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/test.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/ws.rs
+
+/home/adamm/Rust/rust_api/target/debug/deps/libawc-79c928089b549774.rmeta: /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/lib.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/builder.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/connect.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/error.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/frozen.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/request.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/response.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/sender.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/test.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/ws.rs
+
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/lib.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/builder.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/connect.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/error.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/frozen.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/request.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/response.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/sender.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/test.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/awc-2.0.3/src/ws.rs:

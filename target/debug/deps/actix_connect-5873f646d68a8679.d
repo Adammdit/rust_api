@@ -1,0 +1,12 @@
+/home/adamm/Rust/rust_api/target/debug/deps/actix_connect-5873f646d68a8679.d: /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/lib.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/connect.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/connector.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/error.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/resolve.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/service.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/ssl/mod.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/uri.rs
+
+/home/adamm/Rust/rust_api/target/debug/deps/libactix_connect-5873f646d68a8679.rmeta: /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/lib.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/connect.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/connector.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/error.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/resolve.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/service.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/ssl/mod.rs /home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/uri.rs
+
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/lib.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/connect.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/connector.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/error.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/resolve.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/service.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/ssl/mod.rs:
+/home/adamm/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/actix-connect-2.0.0/src/uri.rs:
