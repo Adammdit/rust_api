@@ -5,7 +5,7 @@ use rust_api::state::AppState;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    println!("🚀 Server starting on http://127.0.0.1:8080");
+    println!("🚀 Server starting on http://0.0.0.0:8080");
     let state = web::Data::new(AppState::new());
 
     HttpServer::new(move || {
@@ -17,7 +17,7 @@ async fn main() -> std::io::Result<()> {
             .service(routes::get_item)
             .service(routes::delete_item)
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(("0.0.0.0", 8080))?
     .run()
     .await
 }
