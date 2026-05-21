@@ -22,52 +22,49 @@ This guide covers OS preparation, cgroup configuration, k0s installation, worker
 
 **Update & Upgrade**
 
-- **1 × Raspberry Pi 5**
+- **Controller**
   - Run: `sudo apt-get update`
-- **6 × Banana Pi BPI-M1**
+- **Workers**
   - Run: `sudo apt-get update && sudo armbian-upgrade`
+  - Repeat above steps on all workers
 
 ---
 
 ## 2. Enable cgroups (Required by Kubernetes)
 
-**Edit the Armbian boot configuration:**
+**Edit boot configuration:**
 
-`sudo nano /boot/armbianEnv.txt`
-
-**Add the following line:**
-
-`extraargs=cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1`
-
-**Reboot:**
-
-`sudo reboot`
+- **Controller**
+  - Run: `sudo nano /boot/firmware/cmdline.txt`
+  - Add line: `cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1`
+  - Run: `sudo reboot`
+- **Workers**
+  - Run: `sudo nano /boot/armbianEnv.txt`
+  - Add line: `extraargs=cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1`
+  - Run: `sudo reboot`
+  - Repeat above steps on all workers
 
 ---
 
 ## 3. Set Hostnames
 
-### Controller:
+**Set hostnames for the cluster:**
 
-sudo hostnamectl set-hostname rpi5-controller
-
-### Workers:
-
-sudo hostnamectl set-hostname bananapi-1 sudo hostnamectl set-hostname bananapi-2 sudo hostnamectl set-hostname bananapi-3 sudo hostnamectl set-hostname bananapi-4 sudo hostnamectl set-hostname bananapi-5 sudo hostnamectl set-hostname bananapi-6
-
-Reboot:
-
-sudo reboot
+- **Controller**
+  - Run: `sudo hostnamectl set-hostname controller`
+- **Workers**
+  - Run: `sudo hostnamectl set-hostname bananapi-1`
+  - Run: `sudo hostnamectl set-hostname bananapi-2`
+  - ...
+  - Run: `sudo hostnamectl set-hostname bananapi-6`
+  - Repeat above steps on all workers
 
 ---
 
 ## 4. Install k0s (All Nodes)
 
-sudo curl -sSLf https://get.k0s.sh | sudo sh
-
-Verify installation:
-
-k0s version
+- Run: `sudo curl -sSLf https://get.k0s.sh | sudo sh`
+- Verify installation: `k0s version`
 
 ---
 
@@ -75,15 +72,18 @@ k0s version
 
 ### 5.1 Install Controller Service
 
-sudo k0s install controller --single sudo systemctl enable --now k0scontroller systemctl status k0scontroller
+- Run to install: `sudo k0s install controller`
+- Run to enable: `sudo systemctl enable --now k0scontroller`
+- Run to verify: `systemctl status k0scontroller`
 
 ### 5.2 Generate Worker Join Token
 
-k0s token create --role=worker &gt; worker-token
-
-Copy token to each worker:
-
-scp worker-token root@192.168.0.130:/root/ scp worker-token root@192.168.0.131:/root/ scp worker-token root@192.168.0.132:/root/ scp worker-token root@192.168.0.133:/root/ scp worker-token root@192.168.0.134:/root/ scp worker-token root@192.168.0.135:/root/
+- Run: `sudo k0s token create --role=worker > /root/worker-token`
+- Copy token to bananapi-1: `sudo scp worker-token root@192.168.0.130:/root/`
+- Copy token to bananapi-2: `sudo scp worker-token root@192.168.0.131:/root/`
+- ...
+- Copy token to bananapi-6: `sudo scp worker-token root@192.168.0.135:/root/`
+- Repeat for all workers
 
 ---
 
@@ -91,23 +91,21 @@ scp worker-token root@192.168.0.130:/root/ scp worker-token root@192.168.0.131:/
 
 ### 6.1 Install Worker Service
 
-sudo k0s install worker --token-file /root/worker-token sudo systemctl enable --now k0sworker systemctl status k0sworker
+- Run to install: `sudo k0s install worker --token-file /root/worker-token`
+- Run to enable: `sudo systemctl enable --now k0sworker`
+- Run to verify: `systemctl status k0sworker`
 
 ### 6.2 If worker fails to join
 
-sudo systemctl restart k0sworker
-
-Repeat until the controller reports the node as **Ready**.
+- Rum: `sudo systemctl restart k0sworker`
+- Repeat until the controller reports the node as **Ready**.
 
 ---
 
 ## 7. Verify Cluster Status (Controller)
 
-k0s kubectl get nodes
-
-Expected output:
-
-bananapi-1 Ready bananapi-2 Ready bananapi-3 Ready bananapi-4 Ready bananapi-5 Ready bananapi-6 Ready rpi5-controller Ready
+- Run: `sudo k0s kubectl get nodes`
+- Expected output: You should see all the workers listed READY
 
 ---
 
@@ -115,74 +113,22 @@ bananapi-1 Ready bananapi-2 Ready bananapi-3 Ready bananapi-4 Ready bananapi-5 R
 
 ### 8.1 Build Multi‑Arch Docker Image
 
-docker buildx build --platform linux/arm/v7,linux/arm64 -t /rust-api:latest --push .
+- Run: `docker login\ndocker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t adammdit/rust-api:latest --push .`
 
-### 8.2 Deployment Manifest
+### 8.2 Deployment & Service Manifest
 
-apiVersion: apps/v1 kind: Deployment metadata: name: rust-api spec: replicas: 3 selector: matchLabels: app: rust-api template: metadata: labels: app: rust-api spec: containers: - name: rust-api image: /rust-api:latest ports: - containerPort: 8080
+- Config: `k0s/deployment.yaml`Apply: `sudo k0s kubectl apply -f deployment.yaml`S
 
-Apply:
+### 8.3 Validate Application
 
-k0s kubectl apply -f deployment.yaml
-
-### 8.3 Service Manifest
-
-k0s kubectl apply -f service.yaml
-
-### 8.4 Validate Application
-
-curl http://127.0.0.1:8080/health
-
-Expected:
-
-OK
+- Run: `curl http://192.168.0.133:30979/health`
+- Expected: OK
+- Works with any worker IP.
 
 ---
 
-## 9. Node IP Reference Table
+## 9. Cluster Health Checks
 
-IP Address
-
-Hostname
-
-192.168.0.120
-
-rpi5-controller
-
-192.168.0.130
-
-bananapi-1
-
-192.168.0.131
-
-bananapi-2
-
-192.168.0.132
-
-bananapi-3
-
-192.168.0.133
-
-bananapi-4
-
-192.168.0.134
-
-bananapi-5
-
-192.168.0.135
-
-bananapi-6
-
-10. Cluster Health Checks
-
-Node status:
-
-k0s kubectl get nodes
-
-Pod status:
-
-k0s kubectl get pods -A
-
-API health:
-
-curl <http://127.0.0.1:8080/health>
+- Nods status: `k0s kubectl get nodes`
+- Pods status: `k0s kubectl get pods -A`
+- API health: `curl http://192.168.0.133:30979/health`
