@@ -14,6 +14,7 @@ async fn main() -> std::io::Result<()> {
             .service(routes::health)
             .service(routes::list_items)
             .service(routes::create_item)
+            .service(routes::update_item)
             .service(routes::get_item)
             .service(routes::delete_item)
     })

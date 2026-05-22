@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# List your worker nodes here
+# All the workers were added to /etc/hosts with these names, so we can use them directly
 WORKERS=(
   bananapi-1
   bananapi-2

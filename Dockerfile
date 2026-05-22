@@ -1,7 +1,7 @@
 # ============================
 # 1. Builder image
 # ============================
-FROM rust:1.80 AS builder
+FROM rust:1.83 AS builder
 
 # Install system dependencies needed for OpenSSL, pkg-config, and native builds
 RUN apt-get update && apt-get install -y \
@@ -9,6 +9,9 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
+
+# Use nightly Cargo for edition2024 dependencies
+RUN rustup toolchain install nightly && rustup default nightly
 
 # Create app directory
 WORKDIR /app

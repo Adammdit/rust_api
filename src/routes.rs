@@ -1,6 +1,25 @@
-use actix_web::{get, post, delete, web, Responder};
-use crate::{state::AppState, errors::ApiError};
+use actix_web::{delete, get, patch, post, web, Responder};
+use crate::{errors::ApiError, state::AppState};
+use serde::Deserialize;
 use uuid::Uuid;
+
+#[derive(Deserialize)]
+pub struct CreateItemRequest {
+    pub name: String,
+    pub description: Option<String>,
+}
+
+#[derive(Deserialize)]
+pub struct UpdateItemRequest {
+    pub name: Option<String>,
+    pub description: Option<Option<String>>,
+    pub completed: Option<bool>,
+}
+
+#[derive(Deserialize)]
+pub struct ListQuery {
+    pub completed: Option<bool>,
+}
 
 #[get("/health")]
 pub async fn health() -> impl Responder {
@@ -8,21 +27,35 @@ pub async fn health() -> impl Responder {
 }
 
 #[get("/items")]
-pub async fn list_items(data: web::Data<AppState>) -> impl Responder {
-    let items = data.items.lock().unwrap();
-    web::Json(items.clone())
+pub async fn list_items(
+    data: web::Data<AppState>,
+    query: web::Query<ListQuery>,
+) -> impl Responder {
+    let items = data.list_items(query.completed);
+    web::Json(items)
 }
 
 #[post("/items")]
 pub async fn create_item(
     data: web::Data<AppState>,
-    body: web::Json<serde_json::Value>,
+    body: web::Json<CreateItemRequest>,
 ) -> Result<impl Responder, ApiError> {
-    let name = body.get("name")
-        .and_then(|v| v.as_str())
-        .ok_or_else(|| ApiError::BadRequest("Missing name".into()))?;
+    let item = data.add_item(body.name.clone(), body.description.clone());
+    Ok(web::Json(item))
+}
 
-    let item = data.add_item(name.into());
+#[patch("/items/{id}")]
+pub async fn update_item(
+    data: web::Data<AppState>,
+    id: web::Path<String>,
+    body: web::Json<UpdateItemRequest>,
+) -> Result<impl Responder, ApiError> {
+    let id = Uuid::parse_str(&id).map_err(|_| ApiError::BadRequest("Invalid UUID".into()))?;
+
+    let item = data
+        .update_item(id, body.name.clone(), body.description.clone(), body.completed)
+        .ok_or(ApiError::NotFound)?;
+
     Ok(web::Json(item))
 }
 
@@ -33,10 +66,8 @@ pub async fn get_item(
 ) -> Result<impl Responder, ApiError> {
     let id = Uuid::parse_str(&id).map_err(|_| ApiError::BadRequest("Invalid UUID".into()))?;
 
-    let items = data.items.lock().unwrap();
-    let item = items.iter().find(|i| i.id == id).ok_or(ApiError::NotFound)?;
-
-    Ok(web::Json(item.clone()))
+    let item = data.get_item(id).ok_or(ApiError::NotFound)?;
+    Ok(web::Json(item))
 }
 
 #[delete("/items/{id}")]
@@ -46,11 +77,7 @@ pub async fn delete_item(
 ) -> Result<impl Responder, ApiError> {
     let id = Uuid::parse_str(&id).map_err(|_| ApiError::BadRequest("Invalid UUID".into()))?;
 
-    let mut items = data.items.lock().unwrap();
-    let len_before = items.len();
-    items.retain(|i| i.id != id);
-
-    if items.len() == len_before {
+    if !data.delete_item(id) {
         return Err(ApiError::NotFound);
     }
 

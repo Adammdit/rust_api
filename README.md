@@ -113,11 +113,13 @@ This guide covers OS preparation, cgroup configuration, k0s installation, worker
 
 ### 8.1 Build Multi‑Arch Docker Image
 
-- Run: `docker login\ndocker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t adammdit/rust-api:latest --push .`
+- Run: `docker login`
+- Run: `docker buildx build --platform linux/arm/v7 -t adammdit/rust-api:latest --push .`
 
 ### 8.2 Deployment & Service Manifest
 
-- Config: `k0s/deployment.yaml`Apply: `sudo k0s kubectl apply -f deployment.yaml`S
+- Apply the manifest from the repository:
+  - `sudo k0s kubectl apply -f k8s/deployment.yaml`
 
 ### 8.3 Validate Application
 
@@ -129,6 +131,74 @@ This guide covers OS preparation, cgroup configuration, k0s installation, worker
 
 ## 9. Cluster Health Checks
 
-- Nods status: `k0s kubectl get nodes`
-- Pods status: `k0s kubectl get pods -A`
-- API health: `curl http://192.168.0.133:30979/health`
+- Nods status: `sudo k0s kubectl get nodes`
+- Pods status: `sudo k0s kubectl get pods -A`
+- Pods & nodes: `sudo k0s kubectl get pods -o wide`
+- Svc status: `sudo k0s kubectl get svc`
+- Noded perf: `sudo k0s kubectl top nodes`
+- Pods perf: `sudo k0s kubectl top pods -A`
+- Verify deployment: `sudo k0s kubectl rollout status deployment rust-api`
+- Check the running image: `sudo k0s kubectl get pod -l app=rust-api -o jsonpath='{.items[0].spec.containers[0].image}'`
+- Get into a pod: `sudo k0s kubectl exec -it <your-pod-name> -- sh`
+- Describe a pot: `sudo k0s kubectl describe pod rust-api-7cdf44d9f-6shh5`
+
+---
+
+## 10. Rust API Application
+
+This repository also contains a small Actix-web API with embedded persistent storage using `sled`.
+
+### Data persistence
+
+- Data is stored under `data/db` using an embedded key/value database.
+- Items survive restarts and are serialized as JSON by UUID key.
+
+### API endpoints
+
+- `GET /health` — health check
+- `GET /items` — list all items
+- `GET /items?completed=true` — list completed items
+- `POST /items` — create a new item
+- `GET /items/{id}` — get item by UUID
+- `PATCH /items/{id}` — update item fields
+- `DELETE /items/{id}` — delete item by UUID
+
+### Example requests
+
+Create item:
+
+```bash
+curl -X POST http://192.168.0.133:30979/items \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Write README","description":"Add persistent storage docs"}'
+```
+
+Update item:
+
+```bash
+curl -X PATCH http://192.168.0.133:30979/items/<uuid> \
+  -H "Content-Type: application/json" \
+  -d '{"completed":true}'
+```
+
+List items:
+
+```bash
+curl http://http://192.168.0.133:30979/items
+```
+
+List completed items:
+
+```bash
+curl http://192.168.0.133:30979/items?completed=true
+```
+
+### Run locally
+
+```bash
+cargo run
+```
+
+The API listens on `0.0.0.0:8080` by default.
+
+If you want the local API only, run `cargo run` and use `http://localhost:8080`.
